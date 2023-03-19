@@ -1,0 +1,127 @@
+---
+title: "Data605_Assignment08"
+author: "Mahmud Hasan Al Raji"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Exercise-11: 11 A company buys 100 lightbulbs, each of which has an exponential lifetime of 1000 hours. What is the expected time for the first of these bulbs to burn out? (See Exercise 10)
+
+# Ans-11:
+
+From exercise 10, the minimum value has mean = $\mu$/$n$
+
+Here, $\mu$ $=$ $1000$ $and$ $n$ $=$ $100$
+
+Therefore, the expected time for the first of the given bulbs to burn out is $1000$/$100$ $=$ $10$ $hours$
+
+# Using R code:
+```{r }
+set.seed(158)
+
+# Number of lightbulbs
+n <- 100 
+
+# Failure rate
+lambda <- 1/1000   
+
+# Simulating the lifetime of the lightbulbs
+lifetime <- rexp(n, lambda)
+
+# Expected time to burn out the first lightbulb 
+first_lightbulb_burnout_time <- min(lifetime)
+first_lightbulb_burnout_time 
+```
+
+# Exercise-14: Assume that X1 and X2 are independent random variables, each having an exponential density with parameter λ. Show that Z = X1 − X2 has density: fZ(z) = (1/2)λe−λ|z|
+
+# Ans-14:
+
+Density function of Z = X1 - X2 can be found by using the convolution formula:
+
+fZ(z) = $\int$ fX1(t) fX2(z-t) dt, where fX1 and fX2 are the density functions of X1 and X2 respectively
+
+As X1 and X2 are both exponentially distributed with parameter $\lambda$, their density functions are:
+
+fX1(x) = $\lambda$e^(-$\lambda$x), for x >= 0
+
+fX2(x) = $\lambda$e^(-$\lambda$x), for x >= 0
+
+Substituting these expressions into the convolution formula: 
+
+fZ(z) = $\int$ $\lambda$e^(-$\lambda$t) $\lambda$e^(-$\lambda$(z-t)) dt
+
+By simplifying:
+
+fZ(z) = $\lambda$^2 $\int$ e^(-$\lambda$t) e^(-$\lambda$z+$\lambda$t) dt
+
+fZ(z) = $\lambda$^2 $\int$ e^(-$\lambda$z) dt
+
+fZ(z) = $\lambda$^2 e^(-$\lambda$z) $\int$dt
+
+fZ(z) = $\lambda$^2 e^(-$\lambda$z) t / |t| from -$\infty$ to +$\infty$
+
+we have to consider here two cases: one where t is positive and another one where t is negative.By simplifying the above expression further we get:
+
+fZ(z)= ($\lambda$^2/2) e^(-$\lambda$|z|)
+
+Therefore, the density function of Z is:
+
+fZ(z) = (1/2)$\lambda$e^(-$\lambda$|z|)
+
+
+# Exercise-1: 1 Let X be a continuous random variable with mean µ = 10 and variance σ2 = 100/3. Using Chebyshev’s Inequality, find an upper bound for the following probabilities.
+# (a) P(|X − 10| ≥ 2).  
+# (b) P(|X − 10| ≥ 5). 
+# (c) P(|X − 10| ≥ 9).  
+# (d) P(|X − 10| ≥ 20).
+
+# Ans-1:
+
+# Given parameter
+```{r}
+µ<-10
+σ <-sqrt(100/3)
+```
+
+# (a) P(|X − 10| ≥ 2):
+```{r }
+kσ<-2
+k<-2/σ
+upper_a<-1/k^2
+round(upper_a,2)
+```
+
+# (b) P(|X − 10| ≥ 5): 
+```{r}
+kσ<- 5
+k<-5/σ
+upper_b<-1/k^2
+round(upper_b,2)
+```
+
+
+# (c) P(|X − 10| ≥ 9):
+```{r}
+kσ<-9
+k<-9/σ
+upper_c<-1/k^2
+round(upper_c,2)
+
+```
+
+
+# (d) P(|X − 10| ≥ 20): 
+```{r}
+kσ<-20
+k<-20/σ
+upper_d<-1/k^2
+round(upper_d,2)
+```
+
+
+
